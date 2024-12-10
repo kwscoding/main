@@ -41,7 +41,7 @@ function gotoPaymentPage() {
     }
 
     // 결제 페이지로 이동 (가상의 페이지로 이동)
-    window.location.href = '결제페이지.html';  // 실제 결제 페이지의 URL로 변경 가능
+    window.location.href = 'paymentPage.html';  // 실제 결제 페이지의 URL로 변경 가능
 
     // 결제 페이지에서 결제 완료 알람을 띄울 준비
     localStorage.setItem('totalPrice', totalPrice);
