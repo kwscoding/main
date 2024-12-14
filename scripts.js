@@ -50,7 +50,7 @@ function updateCartDisplay() {
 // 결제 페이지로 이동하는 함수
 function gotoPaymentPage() {
     if (cart.length === 0) {
-        alert('장바구니에 상품이 없습니다. 상품을 담아주세요.');    
+        alert('장바구니에 상품이 없습니다. 상품을 담아주세요.');
         return;
     }
 
@@ -60,3 +60,24 @@ function gotoPaymentPage() {
     // 결제 페이지에서 결제 완료 알람을 띄울 준비
     localStorage.setItem('totalPrice', totalPrice);
 }
+/** 로그인 페이지  */
+function goToLoginPage(){
+    window.location.href = 'loginPage.html';
+}
+
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // 폼 기본 제출 방지
+  
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+  
+    if (username === "" || password === "") {
+      alert("모든 필드를 입력해주세요.");
+      return;
+    }
+  
+    // 간단한 검증 후 폼 제출
+    console.log("로그인 정보:", { username, password });
+    alert("로그인 성공!");
+  });
+  
