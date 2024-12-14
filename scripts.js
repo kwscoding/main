@@ -4,14 +4,25 @@ let totalPrice = 0;
 
 // 장바구니에 상품 추가 함수
 function addToCart(productName, productPrice) {
-    // 상품을 장바구니에 추가
-    cart.push({ name: productName, price: productPrice });
+    // 이미 장바구니에 동일한 상품이 있는지 확인
+    const existingItem = cart.find(item => item.name === productName);
 
-    // 총 합계 계산
-    totalPrice += productPrice;
+    if (existingItem) {
+        // 동일한 상품이 있으면 수량만 증가시킴
+        existingItem.quantity += 1;
+        totalPrice += productPrice;  // 총 가격 업데이트
+    } else {
+        // 장바구니에 없는 상품이면 새로 추가
+        cart.push({ name: productName, price: productPrice, quantity: 1 });
+        totalPrice += productPrice;  // 총 가격 업데이트
+    }
 
     // 장바구니 목록에 추가된 항목을 표시
     updateCartDisplay();
+}
+// 가격에 천 단위 구분 쉼표를 추가하는 함수
+function formatPrice(price) {
+    return price.toLocaleString();  // 가격에 쉼표 추가
 }
 
 // 장바구니 항목과 총 합계를 화면에 업데이트하는 함수
@@ -25,12 +36,15 @@ function updateCartDisplay() {
     // 장바구니 항목을 화면에 추가
     cart.forEach(item => {
         const li = document.createElement('li');
-        li.textContent = `${item.name} - ${item.price}원`;
+        li.textContent = `${item.name} - ${formatPrice(item.price)}원   ${item.quantity}개 = ${formatPrice(item.price * item.quantity)}원`;
+        totalPriceElement.textContent = `총 합계: ${formatPrice(totalPrice)}원`;
+
         cartItemsElement.appendChild(li);
+        
     });
 
     // 총 합계 업데이트
-    totalPriceElement.textContent = `총 합계: ${totalPrice}원`;
+    totalPriceElement.textContent = `총 합계: ${formatPrice(totalPrice)}원`;
 }
 
 // 결제 페이지로 이동하는 함수
