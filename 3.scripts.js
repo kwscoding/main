@@ -64,56 +64,39 @@ function gotoPaymentPage() {
     // 결제 페이지에서 결제 완료 알람을 띄울 준비
     localStorage.setItem('totalPrice', totalPrice);
 }
-
-
-// ---------------------------상품 정렬--------------------------------
-const products = [
-    { name: '상품1', price: 20000, views: 120, image: 'https://via.placeholder.com/200' },
-    { name: '상품2', price: 30000, views: 80, image: 'https://via.placeholder.com/200' },
-    { name: '상품3', price: 15000, views: 200, image: 'https://via.placeholder.com/200' },
-    { name: '상품4', price: 30000, views: 80, image: 'https://via.placeholder.com/200' },
-    { name: '상품5', price: 15000, views: 200, image: 'https://via.placeholder.com/200' },
-    { name: '상품6', price: 70000, views: 30, image: 'https://via.placeholder.com/200' },
-    { name: '상품7', price: 15500, views: 2010, image: 'https://via.placeholder.com/200' },
-    { name: '상품8', price: 30200, views: 280, image: 'https://via.placeholder.com/200' },
-    { name: '상품9', price: 115000, views: 1200, image: 'https://via.placeholder.com/200' }
-];
-
-
-function renderProducts(products) {
-    const productList = document.getElementById('product-list');
-    productList.innerHTML = '';
-    products.forEach(product => {
-        const productDiv = document.createElement('div');
-        productDiv.classList.add('product');
-        productDiv.innerHTML = `
-            <img src="${product.image}" alt="${product.name}">
-            <h3>${product.name}</h3>
-            <p>가격: ${product.price.toLocaleString()}원</p>
-            <p>조회수: ${product.views}</p>
-            <button onclick="addToCart('${product.name}', ${product.price})">장바구니에 담기</button>
-        `;
-        productList.appendChild(productDiv);
-    });
-}
-
-function sortProducts() {
-    const sortOption = document.getElementById('sort').value;
-    let sortedProducts = [...products];
-    if (sortOption === 'price-asc') {
-        sortedProducts.sort((a, b) => a.price - b.price);
-    } else if (sortOption === 'price-desc') {
-        sortedProducts.sort((a, b) => b.price - a.price);
-    } else if (sortOption === 'views-asc') {
-        sortedProducts.sort((a, b) => a.views - b.views);
-    } else if (sortOption === 'views-desc') {
-        sortedProducts.sort((a, b) => b.views - a.views);
-    }
-    renderProducts(sortedProducts);
-}
 function gotoLoginPage() {
     window.location.href ="6.loginPage.html";
 }
+
+
+//홈 화면 페이지 슬라이드
+let currentIndex = 0;
+const slides = document.querySelectorAll('.slide'); // 슬라이드 요소들
+const totalSlides = slides.length; // 슬라이드 갯수
+
+function showSlide(index) {
+    const slider = document.querySelector('.slider');
+    const offset = -index * 100; // 슬라이드를 100%씩 이동
+    slider.style.transform = `translateX(${offset}%)`; // 슬라이드 이동
+}
+
+function nextSlide() {
+    currentIndex = (currentIndex + 1) % totalSlides; // 마지막 이미지에서 첫 번째 이미지로 돌아옴
+    showSlide(currentIndex);
+}
+
+function prevSlide() {
+    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; // 첫 번째 이미지에서 마지막 이미지로 돌아옴
+    showSlide(currentIndex);
+}
+
+// 자동으로 슬라이드 넘기기 (3초마다)
+setInterval(nextSlide, 3000);
+
+// 최초 슬라이드 표시
+showSlide(currentIndex);
+
+//카테고리
 document.getElementById("toggle-menu").addEventListener("click", function() {
     var categories = document.getElementById("categories");
     var menuIcon = document.getElementById("menu-icon");

@@ -16,8 +16,8 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     event.preventDefault();
 
     // 로그인 폼에서 입력된 값 가져오기
-    const loginUsername = document.getElementById('loginUsername').value;
-    const loginPassword = document.getElementById('loginPassword').value;
+    const loginUsername = document.getElementById('username').value;
+    const loginPassword = document.getElementById('password').value;
 
     // 로컬 스토리지에서 저장된 사용자 정보 가져오기
     const storedUserInfo = localStorage.getItem('userInfo');
