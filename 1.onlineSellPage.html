@@ -8,7 +8,18 @@
 </head>
 <body>
     <header>
-        <h1>온라인 쇼핑몰</h1>
+        <h1 onclick="window.location.href='10.homePage.html'">온라인 쇼핑몰</h1>
+        <ul class="gnb">
+            <li><a href="">≡</a>
+                <ul class="sub">
+                    <li><a href="">서브메뉴</a></li>
+                    <li><a href="">서브메뉴</a></li>
+                    <li><a href="">서브메뉴</a></li>
+                    <li><a href="">서브메뉴</a></li>
+                    <li><a href="">서브메뉴</a></li>
+                </ul>
+            </li>
+        </ul>
         <nav>
             <a href="10.homePage.html">홈</a>
             <a href="#">상품 목록</a>
@@ -50,5 +61,15 @@
     </footer>
 
     <script src="3.scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script>
+        $('.gnb .sub').hide();
+        $('.gnb > li').on('mouseenter', function(){
+            $(this).children('.sub').stop(true, true).fadeIn(500);  // 해당 li의 서브 메뉴만 보이게 함
+        });
+        $('.gnb > li').on('mouseleave', function(){
+            $(this).children('.sub').stop(true, true).fadeOut(500);  // 해당 li의 서브 메뉴만 사라지게 함
+        });
+    </script>
 </body>
 </html>
