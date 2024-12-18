@@ -139,19 +139,39 @@ footer {
     margin: 0 auto;
     overflow: hidden;
     position: relative;
+}/* 슬라이드 컨테이너 */
+.slider-container {
+    width: 100%; /* 컨테이너 너비 */
+    overflow: hidden; /* 화면 밖의 내용 숨김 */
+    position: relative; /* 절대 위치를 위한 기준 */
 }
 
-/* 슬라이드 컨테이너 */
+/* 슬라이드 전체를 감싸는 요소 */
 .slider {
-    display: flex;
-    transition: transform 0.5s ease;
-    width: 300%; /* 3개의 이미지 너비 합 */
+    display: flex; /* 슬라이드를 가로로 나열 */
+    position: relative;
+    width: 100%;
 }
 
-/* 각 이미지 */
+/* 개별 슬라이드 */
+.slide {
+    flex: 0 0 100%; /* 각 슬라이드가 컨테이너의 100%를 차지 */
+    display: none; /* 기본적으로 숨김 */
+    justify-content: center; /* 이미지 가로 중앙 정렬 */
+    align-items: center; /* 이미지 세로 중앙 정렬 */
+    box-sizing: border-box; /* 패딩 포함 크기 계산 */
+}
+
+/* 활성화된 슬라이드 */
+.slide.active {
+    display: flex; /* 활성화된 슬라이드는 보이도록 설정 */
+}
+
+/* 슬라이드 이미지 */
 .slide img {
-    width: 100%; /* 각 이미지의 너비 100% */
-    height: auto;
+    max-width: 100%; /* 이미지가 슬라이드 너비를 넘지 않도록 */
+    max-height: 100%; /* 이미지가 슬라이드 높이를 넘지 않도록 */
+    object-fit: contain; /* 이미지 비율 유지 */
 }
 
 /* 버튼 스타일 */

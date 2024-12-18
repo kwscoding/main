@@ -64,37 +64,38 @@ function gotoPaymentPage() {
     // 결제 페이지에서 결제 완료 알람을 띄울 준비
     localStorage.setItem('totalPrice', totalPrice);
 }
-function gotoLoginPage() {
-    window.location.href ="6.loginPage.html";
-}
-
-
-//홈 화면 페이지 슬라이드
-let currentIndex = 0;
-const slides = document.querySelectorAll('.slide'); // 슬라이드 요소들
-const totalSlides = slides.length; // 슬라이드 갯수
+let currentIndex = 0; // 현재 슬라이드 인덱스
+const slides = document.querySelectorAll('.slide'); // 모든 슬라이드 요소
+const totalSlides = slides.length; // 슬라이드 개수
 
 function showSlide(index) {
-    const slider = document.querySelector('.slider');
-    const offset = -index * 100; // 슬라이드를 100%씩 이동
-    slider.style.transform = `translateX(${offset}%)`; // 슬라이드 이동
+    // 모든 슬라이드를 숨김
+    slides.forEach(slide => slide.classList.remove('active'));
+    
+    // 현재 인덱스의 슬라이드만 표시
+    slides[index].classList.add('active');
 }
 
 function nextSlide() {
-    currentIndex = (currentIndex + 1) % totalSlides; // 마지막 이미지에서 첫 번째 이미지로 돌아옴
+    currentIndex = (currentIndex + 1) % totalSlides; // 마지막 슬라이드에서 첫 번째로 순환
     showSlide(currentIndex);
 }
 
 function prevSlide() {
-    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; // 첫 번째 이미지에서 마지막 이미지로 돌아옴
+    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; // 첫 번째 슬라이드에서 마지막으로 순환
     showSlide(currentIndex);
 }
 
-// 자동으로 슬라이드 넘기기 (3초마다)
+// 초기 슬라이드 표시
+window.addEventListener('load', () => {
+    showSlide(currentIndex);
+});
+
+// 자동 슬라이드 (3초마다)
 setInterval(nextSlide, 3000);
 
-// 최초 슬라이드 표시
-showSlide(currentIndex);
+
+
 
 //카테고리
 document.getElementById("toggle-menu").addEventListener("click", function() {
